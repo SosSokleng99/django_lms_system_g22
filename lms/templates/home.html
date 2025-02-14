@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS | Home</title>
-</head>
-<body>
-    <h1>Welcome to LMS system!</h1>
-</body>
-</html>
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Welcome to LMS system! Home</h1>
+<h5> The library has the following record counts: </h5>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Original Book</td>
+        <td>{{ numberBooks }}</td>
+      </tr>
+      <tr>
+        <td>Total Book Copies</td>
+        <td>{{ numberBookCopies }}</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock  %}
+

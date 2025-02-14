@@ -37,7 +37,7 @@ class Genre(models.Model):
 class Book(models.Model):
 
     #Book Data field / Properties
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True, help_text="Enter the title of the book")
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             unique=True,
@@ -63,8 +63,6 @@ class Book(models.Model):
         return ', '.join(genre_names)  # Join the list into a single string separated by commas
 
     displayGenre.short_description = 'Genre'
-
-
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
