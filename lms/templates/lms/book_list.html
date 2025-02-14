@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h5> Book List View </h5>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">ISBN</th>
+        <th scope="col">Grene</th>
+      </tr>
+    </thead>
+    {% comment %} book_list <LIST> {% endcomment %}
+    <tbody>
+        {% if book_list %}
+            {% for book in book_list %}
+        
+            <tr>
+                <td><a href="{{ book.get_absolute_url }}"> {{ book.title }}</a></td>
+                <td> {{ book.isbn }} </td>
+                <td> {{ book.displayGenre }} </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <p>There are no books in the LMS System.</p>
+        {% endif %}
+    </tbody> 
+  </table>
+{% endblock  %}

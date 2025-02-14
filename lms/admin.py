@@ -14,7 +14,15 @@ admin.site.register(Book, BookAdmin)
 
 
 
+class BookInstanceAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'imprint', 'borrower')
+
+    list_filter = ('borrower', "status")
+
+
+admin.site.register(BookInstance, BookInstanceAdmin)
+
+
 # admin.site.register(Book)
 admin.site.register(Genre)
 
-admin.site.register(BookInstance)

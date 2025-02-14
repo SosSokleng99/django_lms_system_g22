@@ -21,8 +21,17 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('lms/', include("lms.urls")),
 
-    path('lms/', include("lms.urls"))
+    #URL for User Authentication
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
 
 
+#Redirect to Based URL of LMS e.g. http://127.0,1.8000/lms/
+from django.views.generic import RedirectView
+
+urlpatterns += [
+    path("", RedirectView.as_view(url="/lms/", permanent = True))
+]

@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h5>All Book Copies List </h5>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID(Book Copies)</th>
+        <th scope="col">Book Title</th>
+        <th scope="col">Imprint</th>
+        <th scope="col">Borrower</th>
+      </tr>
+    </thead>
+    {% comment %} book_list <LIST> {% endcomment %}
+    <tbody>
+        {% if bookinstance_list %}
+            {% for bookInstance in bookinstance_list %}
+        
+            <tr>
+                <td>{{ bookInstance }}</td>
+                <td><a href="{% url "book-detail" pk=bookInstance.book.pk %}">{{ bookInstance.book.title }}</a> </td>
+                <td> {{ bookInstance.imprint }} </td>
+                <td> {{ bookInstance.borrower }} </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <p>There are no books in the LMS System.</p>
+        {% endif %}
+    </tbody> 
+  </table>
+{% endblock  %}
