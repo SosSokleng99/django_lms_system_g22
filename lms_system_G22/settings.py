@@ -93,10 +93,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # use mysql engine setting
         'NAME': 'lms_db_g22',
-        'USER': 'root',
+        'USER': 'lmsg22',
         # 'PASSWORD': 'admin@12345',
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'localhost',  # or the hostname where your MySQL server is running
+        'HOST': 'lmsg22.mysql.pythonanywhere-services.com',  # or the hostname where your MySQL server is running
         'PORT': '3306',      # or the port on which your MySQL server is listening
     }
 }
