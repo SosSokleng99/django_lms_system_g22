@@ -31,7 +31,26 @@ class Genre(models.Model):
         Return a specific detail data of Genre model based on id.
         '''
         return reverse("genre-detail", kwargs={"pk": self.pk})
-    
+
+#Update model.py with: Author Model
+
+class Author(models.Model):
+    """Model representing an author."""
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    date_of_birth = models.DateField("D-O-B", null=True, blank=True)
+    date_of_death = models.DateField("Died", null=True, blank=True)
+
+    class Meta: 
+        ordering = ['last_name', 'first_name']
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular author instance."""
+        return reverse('author-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.first_name} {self.last_name}'
 
 # Model: Books
 class Book(models.Model):
@@ -39,6 +58,7 @@ class Book(models.Model):
     #Book Data field / Properties
     title = models.CharField(max_length=200, unique=True, help_text="Enter the title of the book")
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
+    author = models.ForeignKey(Author,on_delete=models.RESTRICT, null=True, blank=True )
     isbn = models.CharField('ISBN', max_length=13,
                             unique=True,
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
@@ -98,6 +118,7 @@ class BookInstance(models.Model):
     #Metadata
     class Meta:
         ordering = ['due_back']
+        permissions = (("can_views_all_borrowed_books", "For Staff account Login can views all Borrowed Books"),)
     
     def get_absolute_url(self):
         """Returns the url to access a particular book instance."""

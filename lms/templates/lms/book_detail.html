@@ -3,6 +3,8 @@
 {% block content %}
     
     <h3><span><a style="color: black;" href="{% url "books" %}"><i class="fa-solid fa-arrow-left"></i></a></span> Title: {{ book.title }}</h3>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    
     <p><strong>Summary:</strong> {{ book.summary }}</p>
     <p><strong>ISBN:</strong> {{ book.isbn }}</p>
     <p><strong>Genre:</strong> {{ book.displayGenre }}</p> <!-- #display_genre function is defined under book class in models.py -->

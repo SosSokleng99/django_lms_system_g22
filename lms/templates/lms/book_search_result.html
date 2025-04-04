@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+
+<h2>Search Book</h2>
+
+<form style="display: block;" action="{% url "book-search" %}" method="get">
+     {{ form.as_p}}     
+    <input type="submit" value="Search">
+</form>
+
+{% if search_results %}
+    <h3>Search Result:</h3>
+        <ul>
+            {% for search in search_results %}
+                <li> {{ search.title }} <br> {{ search.author }}</li>
+            {% endfor %}
+        </ul>
+{% else %}
+<p>There is no Book you Looking for...</p>
+{% endif %}
+
+{% endblock  %}

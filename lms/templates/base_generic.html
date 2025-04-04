@@ -22,8 +22,11 @@
             <div class="container-fluid">
                 <a class="navbar-brand h1" href="{% url 'home' %}">LMS System</a>
 
+                <!-- Search Bar -->
+                <button type="submit" ><a href="{% url "book-search" %}">Search</a></button>
+
                 {% if user.is_authenticated %}
-                <p><strong>Welcome</strong> {{ user.username }}</p>
+                <p><strong>Welcome</strong> {{ user.username|capfirst }}</p>
                 {% endif %}
             </div>
         </nav>
@@ -39,11 +42,13 @@
                             <li class="list-group-item list-group-item-action"><a class="link-dark link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
                             <li class="list-group-item list-group-item-action"><a class="link-dark link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url "books" %}"><i class="fa-duotone fa-solid fa-book"></i> All Books</a></li>
                             <li class="list-group-item list-group-item-action"><a class="link-dark link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url "book-copies" %}"><i class="fa-solid fa-swatchbook"></i> Books Copies</a></li>
-                            <li class="list-group-item list-group-item-action"><a class="link-dark link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url "books" %}"><i class="fa-solid fa-user-graduate"></i> Authors</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="link-dark link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url "authors" %}"><i class="fa-solid fa-user-graduate"></i> Authors</a></li>
+
+
                             
                             <!-- If user is Loged in we dispaly their below! Along with Logout Button -->
                             {% if user.is_authenticated %}
-                            <li class="list-group-item">Username: {{ user.get_username }}</li>
+                            <li class="list-group-item">Username: {{ user.get_username|capfirst }}</li>
                             <li class="list-group-item"><a href="{% url "mybooks" %}">My Borrowed Book</a></li>
                             <li class="list-group-item">
                              <form id="logout-form" method="post" action="{% url 'logout' %}">
@@ -54,7 +59,17 @@
                             {% else %}
                             <li class="list-group-item"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
                             {% endif %}
-            
+                            
+                        </ul>
+                        <hr> <!-- Devided Line for the Staff Permission only Section-->
+                        <ul>
+                            {% if perms.lms.can_views_all_borrowed_books %}
+
+                            <li class="list-group-item"><strong> STAFF</strong></li>
+                            <li class="list-group-item"><a href="{% url "all-borrowed" %}">All Book Borrowed</a></li>
+                            <li class="list-group-item"><a href="{% url "author-create" %}">Create Author</a></li>
+
+                            {% endif %}
                         </ul>
                     </div>
                     {% endblock %}
